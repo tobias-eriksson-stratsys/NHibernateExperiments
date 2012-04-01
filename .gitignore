@@ -1,0 +1,14 @@
+*.res
+*.resources
+*.cache
+*.ilk
+*.ncb
+*.lce
+*.user
+_ReSharper.*
+bin
+obj
+*.docstates
+Temp
+*.webtestresult
+*.suo

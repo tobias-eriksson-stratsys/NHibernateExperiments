@@ -1,0 +1,453 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Agdur</name>
+    </assembly>
+    <members>
+        <member name="T:Agdur.Abstractions.ISingleBenchmarkMetricBuilder`1">
+            <summary>
+            Used to define the type of metric.
+            </summary>
+            /// <typeparam name="TOutput">The type of the output builder.</typeparam>
+        </member>
+        <member name="T:Agdur.Abstractions.IFluentSyntax">
+            <summary>
+            A hack to hide methods defined on <see cref="T:System.Object"/> for IntelliSense on fluent interfaces.
+            </summary>
+            <remarks>
+            Credit to Daniel Cazzulino.
+            </remarks>
+        </member>
+        <member name="M:Agdur.Abstractions.IFluentSyntax.GetType">
+            <inheritdoc/>
+        </member>
+        <member name="M:Agdur.Abstractions.IFluentSyntax.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Agdur.Abstractions.IFluentSyntax.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:Agdur.Abstractions.IFluentSyntax.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Agdur.Abstractions.ISingleBenchmarkMetricBuilder`1.Value">
+            <summary>
+            Specifies that the single value of the sample should be displayed.
+            </summary>
+        </member>
+        <member name="T:Agdur.Abstractions.ISingleBenchmarkOutputBuilder">
+            <summary>
+            Used to define how the output should be presented.
+            </summary>
+        </member>
+        <member name="M:Agdur.Abstractions.ISingleBenchmarkOutputBuilder.ToConsole">
+            <summary>
+            Writes the output to the console.
+            </summary>
+        </member>
+        <member name="M:Agdur.Abstractions.ISingleBenchmarkOutputBuilder.ToWriter(System.IO.TextWriter)">
+            <summary>
+            Writes the output ot the writer.
+            </summary>
+            <param name="writer">The writer that the output should be written to.</param>
+        </member>
+        <member name="T:Agdur.SimpleMetricFormatter">
+            <summary>
+            Simple formatting.
+            </summary>
+        </member>
+        <member name="T:Agdur.Abstractions.IMetricFormatter">
+            <summary>
+            Provides a functionality for formatting the output.
+            </summary>
+        </member>
+        <member name="M:Agdur.Abstractions.IMetricFormatter.GetOutput(System.String,System.String)">
+            <summary>
+            Returns formatted output.
+            </summary>
+            <param name="nameOfMetric">The name of the metric.</param>
+            <param name="unitOfMeasurement">The unit of measurement.</param>
+            <returns>Formatted output.</returns>
+        </member>
+        <member name="M:Agdur.SimpleMetricFormatter.#ctor(System.Object)">
+            <summary>
+            Creates a new instance of the <see cref="T:Agdur.SimpleMetricFormatter"/> class.
+            </summary>
+            <inheritdoc/>
+            <param name="valueOfMetric">The value of the metric.</param>
+        </member>
+        <member name="M:Agdur.SimpleMetricFormatter.GetOutput(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Agdur.Benchmark">
+            <summary>
+            Provides functionality for performing a rough estimate of the cost of running a specific action.
+            </summary>
+        </member>
+        <member name="T:Agdur.Abstractions.IBenchmarkBuilder">
+            <summary>
+            Used to define the configuration of the benchmark.
+            </summary>
+        </member>
+        <member name="T:Agdur.Abstractions.IBenchmarkRepetitionBuilder">
+            <summary>
+            Used to define the number of times the action to be benchmarked should be run.
+            </summary>
+        </member>
+        <member name="M:Agdur.Abstractions.IBenchmarkRepetitionBuilder.Once">
+            <summary>
+            Specifies that the action should be run once.
+            </summary>
+        </member>
+        <member name="M:Agdur.Abstractions.IBenchmarkRepetitionBuilder.Times(System.Int32)">
+            <summary>
+            Specifies the number of times that the action to be benchmarked should be run.
+            </summary>
+            <param name="numberOfTimes">The number of times that the action to be benchmarked should be run.</param>
+        </member>
+        <member name="M:Agdur.Abstractions.IBenchmarkBuilder.With``1">
+            <summary>
+            Specifies a predefined profile that should be used for benchmarking and reporting the
+            result of the benchmark.
+            </summary>
+            <typeparam name="TProfile">The profile type.</typeparam>
+        </member>
+        <member name="M:Agdur.Abstractions.IBenchmarkBuilder.With(System.Action{Agdur.Abstractions.IBenchmarkRepetitionBuilder})">
+            <summary>
+            Specifies a predefined profile that should be used for benchmarking and reporting the
+            result of the benchmark.
+            </summary>
+            <param name="profile">The profile.</param>
+        </member>
+        <member name="M:Agdur.Benchmark.#ctor(Agdur.Abstractions.IBenchmarkAlgorithm)">
+            <summary>
+            Intializes a new instance of the <see cref="T:Agdur.Benchmark"/> class.
+            </summary>
+            <param name="benchmark">The action to be benchmarked.</param>
+        </member>
+        <member name="M:Agdur.Benchmark.Once">
+            <inheritdoc/>
+        </member>
+        <member name="M:Agdur.Benchmark.Times(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Agdur.Benchmark.With``1">
+            <inheritdoc/>
+        </member>
+        <member name="M:Agdur.Benchmark.With(System.Action{Agdur.Abstractions.IBenchmarkRepetitionBuilder})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Agdur.Benchmark.This(System.Action)">
+            <summary>
+            Benchmarks the specified action.
+            </summary>
+            <param name="action">The action to be benchmarked.</param>
+        </member>
+        <member name="M:Agdur.Benchmark.SetBenchmarkAlgorithmProvider(System.Func{System.Action,Agdur.Abstractions.IBenchmarkAlgorithm})">
+            <summary>
+            Sets the provider that should be used to create a benchmark algorithm.
+            </summary>
+            <param name="provider">The benchmark algorithm provider.</param>
+        </member>
+        <member name="T:Agdur.DefaultBenchmarkAlgorithm">
+            <summary>
+            The default benchmark.
+            </summary>
+            <remarks>
+            Inspired by 
+                http://stackoverflow.com/questions/1507405/c-is-this-benchmarking-class-accurate
+                http://stackoverflow.com/questions/1047218/benchmarking-small-code-samples-in-c-can-this-implementation-be-improved
+            </remarks>
+        </member>
+        <member name="T:Agdur.Abstractions.IBenchmarkAlgorithm">
+            <summary>
+            Provides functionality for implementing a benchmark algorithm.
+            </summary>
+        </member>
+        <member name="M:Agdur.Abstractions.IBenchmarkAlgorithm.Run(System.Int32)">
+            <summary>
+            Runs the benchmark the specified number of times.
+            </summary>
+            <param name="numberOfTimes">The number of times the benchmark should be run.</param>
+            <returns>The result of the benchmark.</returns>
+        </member>
+        <member name="M:Agdur.DefaultBenchmarkAlgorithm.#ctor(System.Action)">
+            <summary>
+            Creates a new instance of the <see cref="T:Agdur.DefaultBenchmarkAlgorithm"/> class.
+            </summary>
+            <param name="action">The action to be benchmarked.</param>
+        </member>
+        <member name="M:Agdur.DefaultBenchmarkAlgorithm.Run(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Agdur.DefaultBenchmarkAlgorithm.WarmUp">
+            <summary>
+            Give the test as good a change as possible of avoiding garbage collection.
+            </summary>
+        </member>
+        <member name="T:Agdur.Abstractions.IBenchmarkProfile">
+            <summary>
+            Provides functionality for defining a reusable benchmark profile.
+            </summary>
+        </member>
+        <member name="M:Agdur.Abstractions.IBenchmarkProfile.Define(Agdur.Abstractions.IBenchmarkRepetitionBuilder)">
+            <summary>
+            Defines the profile.
+            </summary>
+            <param name="builder">The builder on which the profile should be defined.</param>
+        </member>
+        <member name="T:Agdur.Internals.BenchmarkMeasurementBuilder`1">
+            <summary>
+            The measurement builder.
+            </summary>
+        </member>
+        <member name="T:Agdur.Abstractions.IBenchmarkMeasurementBuilder`1">
+            <summary>
+            Used to define the type of measurement that should be used for presenting the metric.
+            </summary>
+            <typeparam name="TOutput">The type of the output builder.</typeparam>
+        </member>
+        <member name="M:Agdur.Abstractions.IBenchmarkMeasurementBuilder`1.InMilliseconds">
+            <summary>
+            States that the metric should be in milliseconds.
+            </summary>
+        </member>
+        <member name="M:Agdur.Abstractions.IBenchmarkMeasurementBuilder`1.InTicks">
+            <summary>
+            States that the metric should be in milliseconds.
+            </summary>
+        </member>
+        <member name="M:Agdur.Abstractions.IBenchmarkMeasurementBuilder`1.InCustomUnitOfTime(System.Func{System.TimeSpan,System.IConvertible},System.String)">
+            <summary>
+            States that the metric should use a custom unit of time based on the specified provider.
+            </summary>
+            <param name="provider">The custom data provider.</param>
+            <param name="unitOfMeasurement">The unit of measurement of the custom data selector.</param>
+        </member>
+        <member name="M:Agdur.Internals.BenchmarkMeasurementBuilder`1.#ctor(Agdur.Internals.Metric,`0)">
+            <summary>
+            Creates a new instance of the <see cref="T:Agdur.Internals.BenchmarkMeasurementBuilder`1"/> class.
+            </summary>
+            <param name="result">The metric result.</param>
+            <param name="builder">The benchmark configuration builder.</param>
+        </member>
+        <member name="M:Agdur.Internals.BenchmarkMeasurementBuilder`1.InMilliseconds">
+            <inheritdoc/>
+        </member>
+        <member name="M:Agdur.Internals.BenchmarkMeasurementBuilder`1.InTicks">
+            <inheritdoc/>
+        </member>
+        <member name="M:Agdur.Internals.BenchmarkMeasurementBuilder`1.InCustomUnitOfTime(System.Func{System.TimeSpan,System.IConvertible},System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Agdur.Internals.BenchmarkBuilder">
+            <summary>
+            Provides a root for the fluent syntax associated with benchmarking.
+            </summary>
+        </member>
+        <member name="T:Agdur.Abstractions.IBenchmarkOutputBuilder">
+            <summary>
+            Used to define how the output should be presented.
+            </summary>
+        </member>
+        <member name="T:Agdur.Abstractions.IBenchmarkMetricBuilder`1">
+            <summary>
+            Used to define the type of metric.
+            </summary>
+            <typeparam name="TOutput">The type of the output builder.</typeparam>
+        </member>
+        <member name="M:Agdur.Abstractions.IBenchmarkMetricBuilder`1.Average">
+            <summary>
+            Specifies that the average value should be calculated.
+            </summary>
+        </member>
+        <member name="M:Agdur.Abstractions.IBenchmarkMetricBuilder`1.Custom(System.String,System.Func{System.Collections.Generic.IEnumerable{System.Double},Agdur.Abstractions.IMetricFormatter})">
+            <summary>
+            Specifies that the value of the custom metric should be calculated.
+            </summary>
+            <param name="nameOfMetric">The name of the custom metric.</param>
+            <param name="metricFunc">The custom metric.</param>
+        </member>
+        <member name="M:Agdur.Abstractions.IBenchmarkMetricBuilder`1.First(System.Int32)">
+            <summary>
+            Specifies that the first number of specified samples should be displayed.
+            </summary>
+            <param name="numberOfSamples">The number of samples that should be displayed.</param>
+        </member>
+        <member name="M:Agdur.Abstractions.IBenchmarkMetricBuilder`1.Max">
+            <summary>
+            Specifies that the maximum value should be calculated.
+            </summary>
+        </member>
+        <member name="M:Agdur.Abstractions.IBenchmarkMetricBuilder`1.Min">
+            <summary>
+            Specifies that the minimum value should be calculated.
+            </summary>
+        </member>
+        <member name="M:Agdur.Abstractions.IBenchmarkMetricBuilder`1.Total">
+            <summary>
+            Specifies that the total value should be calculated.
+            </summary>
+        </member>
+        <member name="M:Agdur.Abstractions.IBenchmarkOutputBuilder.ToConsole">
+            <summary>
+            Writes the output to the console.
+            </summary>
+        </member>
+        <member name="M:Agdur.Abstractions.IBenchmarkOutputBuilder.ToWriter(System.IO.TextWriter)">
+            <summary>
+            Writes the output ot the writer.
+            </summary>
+            <param name="writer">The writer that the output should be written to.</param>
+        </member>
+        <member name="M:Agdur.Internals.BenchmarkBuilder.#ctor(System.Collections.Generic.IEnumerable{System.TimeSpan})">
+            <summary>
+            Creates a new instance of the <see cref="T:Agdur.Internals.BenchmarkBuilder"/> class.
+            </summary>
+            <param name="samples">The samples.</param>
+        </member>
+        <member name="M:Agdur.Internals.BenchmarkBuilder.Average">
+            <inheritdoc/>
+        </member>
+        <member name="M:Agdur.Internals.BenchmarkBuilder.Custom(System.String,System.Func{System.Collections.Generic.IEnumerable{System.Double},Agdur.Abstractions.IMetricFormatter})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Agdur.Internals.BenchmarkBuilder.First(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Agdur.Internals.BenchmarkBuilder.Max">
+            <inheritdoc/>
+        </member>
+        <member name="M:Agdur.Internals.BenchmarkBuilder.Min">
+            <inheritdoc/>
+        </member>
+        <member name="M:Agdur.Internals.BenchmarkBuilder.Total">
+            <inheritdoc/>
+        </member>
+        <member name="M:Agdur.Internals.BenchmarkBuilder.Value">
+            <inheritdoc/>
+        </member>
+        <member name="M:Agdur.Internals.BenchmarkBuilder.ToConsole">
+            <inheritdoc/>
+        </member>
+        <member name="M:Agdur.Internals.BenchmarkBuilder.ToWriter(System.IO.TextWriter)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Agdur.Internals.Ensure">
+            <summary>
+            Provides functionality for ensuring the proper value of arguments and properties.
+            </summary>
+        </member>
+        <member name="M:Agdur.Internals.Ensure.ArgumentNotNull(System.Object,System.String,System.String)">
+            <summary>
+            Ensure that the argument is not null.
+            </summary>
+            <param name="obj">The argument that should not be null.</param>
+            <param name="paramName">The name of the parameter.</param>
+            <param name="message">The message that should be displayed if the argument is null.</param>
+        </member>
+        <member name="M:Agdur.Internals.Ensure.NotNull(System.Object,System.String)">
+            <summary>
+            Ensure that the property is not null.
+            </summary>
+            <param name="obj">The property that should not be null.</param>
+            <param name="message">The message that should be displayed if the argument is null.</param>
+        </member>
+        <member name="M:Agdur.Internals.Ensure.GreaterThanZero(System.Int32,System.String)">
+            <summary>
+            Ensure that the value is greater than zero.
+            </summary>
+            <param name="value">The value that should be greater than zero.</param>
+            <param name="paramName">The name of the parameter.</param>
+        </member>
+        <member name="T:Agdur.Abstractions.IBenchmarkActionBuilder">
+            <summary>
+            Used to define the action that should be benchmarked.
+            </summary>
+        </member>
+        <member name="M:Agdur.Abstractions.IBenchmarkActionBuilder.This(System.Action)">
+            <summary>
+            Benchmarks the specified action.
+            </summary>
+            <param name="action">The action to be benchmarked.</param>
+        </member>
+        <member name="T:Agdur.Internals.Metric">
+            <summary>
+            Provides functionality for reporting the result of a metric.
+            </summary>
+        </member>
+        <member name="M:Agdur.Internals.Metric.#ctor(System.String,System.Func{System.Collections.Generic.IEnumerable{System.Double},Agdur.Abstractions.IMetricFormatter},System.Collections.Generic.IEnumerable{System.TimeSpan})">
+            <summary>
+            Creates a new instance of the <see cref="T:Agdur.Internals.Metric"/> class.
+            </summary>
+            <param name="nameOfMetric">The name of the metric.</param>
+            <param name="metric">The function for calculating the result of the metric.</param>
+            <param name="samples">The sample data.</param>
+        </member>
+        <member name="M:Agdur.Internals.Metric.GetResult">
+            <summary>
+            Returns the result of the metric.
+            </summary>
+            <returns>The result of the metric.</returns>
+        </member>
+        <member name="P:Agdur.Internals.Metric.DataProvider">
+            <summary>
+            Gets or sets the data provider.
+            </summary>
+        </member>
+        <member name="P:Agdur.Internals.Metric.UnitOfMeasurement">
+            <summary>
+            Gets or sets the unit of measurement.
+            </summary>
+        </member>
+        <member name="T:Agdur.MultipleValueFormatter">
+            <summary>
+            Format a multiple value result.
+            </summary>
+        </member>
+        <member name="M:Agdur.MultipleValueFormatter.#ctor(System.Int32,System.Collections.Generic.IEnumerable{System.Double})">
+            <summary>
+            Creates a new instance of the <see cref="T:Agdur.MultipleValueFormatter"/> class.
+            </summary>
+            <param name="numberOfSamples">The number of samples; "cached" since we're dealing with an <see cref="T:System.Collections.Generic.IEnumerable`1"/></param>
+            <param name="samples">The samples.</param>
+        </member>
+        <member name="M:Agdur.MultipleValueFormatter.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:Agdur.MultipleValueFormatter.GetOutput(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Agdur.Internals.NumberToStringMapper">
+            <summary>
+            Provides functionality for converting a number to a string (or word).
+            </summary>
+        </member>
+        <member name="M:Agdur.Internals.NumberToStringMapper.GetWordOrDefault(System.Int32)">
+            <summary>
+            Spells out the single-digit whole numbers and uses the string representation of the numeral for numbers greater than nine.
+            </summary>
+            <param name="number">The number that should be returned as a word or a string.</param>
+            <returns>A word or a string of the specified number.</returns>
+        </member>
+        <member name="T:Agdur.SingleValueFormatter">
+            <summary>
+            Formats a single value result.
+            </summary>
+        </member>
+        <member name="F:Agdur.SingleValueFormatter.OutputMessage">
+            <summary>
+            The output message for a single value result.
+            </summary>
+        </member>
+        <member name="M:Agdur.SingleValueFormatter.#ctor(System.Object)">
+            <summary>
+            Creates a new instance of the <see cref="T:Agdur.SingleValueFormatter"/> class.
+            </summary>
+            <param name="valueOfMetric">The value of the metric.</param>
+        </member>
+        <member name="M:Agdur.SingleValueFormatter.GetOutput(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>
