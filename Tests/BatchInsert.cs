@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace NHibernateExperiments.Tests
 {
-    public class BatchInsert : BaseTest
+    public class BatchInsertTests : BaseTest
     {
         private const int NumberOfEntities = 2000;
 
