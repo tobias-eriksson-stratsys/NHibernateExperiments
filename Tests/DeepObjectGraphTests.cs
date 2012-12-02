@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using NHibernateExperiments.Infrastructure;
 using NHibernateExperiments.Models;
 using NUnit.Framework;
+using System.Linq;
 
 namespace NHibernateExperiments.Tests
 {
@@ -75,6 +77,19 @@ namespace NHibernateExperiments.Tests
 
             Session.QueryOver<ProductVariant>().Fetch(v => v.Values).Eager
                    .WhereRestrictionOn(v => v.Product).IsInG(products).List();
+
+            EnumerateGraph(products);
+        }
+
+        [Test]
+        public void CollectionFetcher()
+        {
+            var products = Session.QueryOver<Product>().List();
+            var fetcher = new CollectionFetcher(Session);
+            fetcher.Fetch<Product>("Variants", products.Select(p => p.Id));
+
+            //Session.QueryOver<ProductVariant>().Fetch(v => v.Values).Eager
+            //       .WhereRestrictionOn(v => v.Product).IsInG(products).List();
 
             EnumerateGraph(products);
 
