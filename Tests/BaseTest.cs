@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace NHibernateExperiments.Tests
 {
     [TestFixture]
-    public class BaseTest
+    public abstract class BaseTest
     {
         static BaseTest()
         {
@@ -131,6 +131,25 @@ namespace NHibernateExperiments.Tests
         protected static void StopTimer()
         {
             Debug.WriteLine("Elapsed: " + _timer.ElapsedMilliseconds);
+        }
+
+        protected void UseNHibernateProfiler()
+        {
+            if (!HibernatingRhinos.Profiler.Appender.ProfilerInfrastructure.IsInitalized)
+            {
+                HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize(new HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateAppenderConfiguration
+                {
+                    Port = 61664,
+                });   
+            }            
+        }
+
+        protected void FlushNHibernateProfiler()
+        {
+            if (HibernatingRhinos.Profiler.Appender.ProfilerInfrastructure.IsInitalized)
+            {
+                HibernatingRhinos.Profiler.Appender.ProfilerInfrastructure.FlushAllMessages();
+            }
         }
     }
 }

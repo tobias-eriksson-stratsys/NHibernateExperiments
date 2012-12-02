@@ -1,4 +1,6 @@
-﻿namespace NHibernateExperiments.Models
+﻿using NHibernate.Mapping.ByCode;
+
+namespace NHibernateExperiments.Models
 {
     public class ProductMap : EntityMapping<Product>
     {

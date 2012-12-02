@@ -40,7 +40,7 @@ namespace NHibernateExperiments.Infrastructure
                                        })
                 .CurrentSessionContext<ThreadStaticSessionContext>()
                 .SetProperty("show_sql", "false")
-                .SetProperty("generate_statistics", "false")
+                .SetProperty("generate_statistics", "true")
                 .AddMapping(domainMapping);
 
             _configuration = config;
