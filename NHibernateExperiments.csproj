@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\CollectionFetcher.cs" />
+    <Compile Include="Infrastructure\ListUtil.cs" />
     <Compile Include="Infrastructure\NHibernateManager.cs" />
     <Compile Include="Infrastructure\TestConnectionProvider.cs" />
     <Compile Include="Models\VariantValueMap.cs" />

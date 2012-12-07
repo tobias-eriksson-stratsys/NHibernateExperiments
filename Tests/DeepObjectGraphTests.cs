@@ -86,10 +86,11 @@ namespace NHibernateExperiments.Tests
         {
             var products = Session.QueryOver<Product>().List();
             var fetcher = new CollectionFetcher(Session);
-            fetcher.Fetch<Product>("Variants", products.Select(p => p.Id));
+            fetcher.Fetch(products, p => p.Variants);
 
-            //Session.QueryOver<ProductVariant>().Fetch(v => v.Values).Eager
-            //       .WhereRestrictionOn(v => v.Product).IsInG(products).List();
+            var productVariants = products.SelectMany(p => p.Variants).ToList();
+            
+            fetcher.Fetch(productVariants, v => v.Values);
 
             EnumerateGraph(products);
 
